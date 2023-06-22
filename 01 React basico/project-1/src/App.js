@@ -28,14 +28,18 @@ class App extends Component {
     setTimeout(()=>{
       this.setState({posts, counter: counter + 1});
     }, 1000);
-  }
-
+  };
+  timeoutUpdate = null;
   componentDidMount(){
     this.handleTimeOut();
   };
 
   componentDidUpdate(){
     this.handleTimeOut();
+  }
+
+  componentWillUnmount(){
+    clearTimeout(this.timeoutUpdate);
   }
 
   render(){
