@@ -4,13 +4,24 @@ import { Component} from 'react';
 // stateless não tem estado
 // componente de class // o componente de classe tem que ter um metodo render e retornar JSX
 class App extends Component {
+    constructor(props){
+      super(props);
+      this.handlePClick = this.handlePClick.blind(this);
+      this.state = {
+        name: 'Augusto Tavares'
+      };
+    }
+    handlePClick(){
+      this.setState({name:'Júnior'});
+    }
     render(){
+      const {name} = this.state;
       return (
             <div className="App">
               <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                  Olá Mundo
+                <p onClick={this.handlePClick}>
+                  Olá Mundo, me chamo {name}
                 </p>
                 <a
                   className="App-link"
