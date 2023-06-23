@@ -4,8 +4,7 @@ import { Component} from 'react';
 import { PostCard } from './components/PostCard';
 class App extends Component {
   state = {
-    posts: [],
-    photos: []
+    posts: []
   };
   componentDidMount(){
     this.loadPosts()
@@ -34,9 +33,9 @@ class App extends Component {
         <div className="posts">
           {posts.map(post => (
             <PostCard
+              key={post.id}
               title={post.title}
               body={post.body}
-              id={post.id}
               cover={post.cover}
             />
         ))}
