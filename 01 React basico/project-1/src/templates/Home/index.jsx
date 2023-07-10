@@ -11,7 +11,8 @@ export class Home extends Component {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 10
+    postsPerPage: 5,
+    serchValue: ''
   };
 
   async componentDidMount() {
@@ -42,20 +43,34 @@ export class Home extends Component {
     this.setState({ posts, page: nextPage });
   }
 
-  render() {
-    const { posts, page, postsPerPage, allPosts } = this.state;
-    const noMorePosts = page + postsPerPage >= allPosts.length;
+  handleChange = (e) => {
+    const { value } = e.target;
+    this.setState({serchValue: value})
+  }
 
+  render() {
+    const { posts, page, postsPerPage, allPosts, serchValue} = this.state;
+    const noMorePosts = page + postsPerPage >= allPosts.length;
+    const filteredPosts = !!serchValue ? allPosts.filter(post =>{
+      return post.title.toLowerCase().includes(serchValue.toLowerCase())
+    }) : posts;
     return (
       <section className="container">
-        <Posts posts={posts} />
+        {!!serchValue && (
+        <><h1>Serch Value: {serchValue}</h1></>)}
+        <input
+          type='search'
+          onChange={this.handleChange}
+          value={serchValue}
+          />
+        <Posts posts={filteredPosts} />
 
-        <div class="button-container">
-          <Button
+        <div className="button-container">
+          {!serchValue && (<Button
             text="Load more posts"
             onClick={this.loadMorePosts}
             disabled={noMorePosts}
-          />
+          />)}
         </div>
       </section>
     );
