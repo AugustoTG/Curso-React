@@ -9,3 +9,10 @@
   display: flex;
   align-items: flex-end;
 }
+.serch-conteiner{
+  margin-bottom: 30px;
+}
+
+.serch-conteiner > h1{
+  margin-bottom: 30px;
+}
