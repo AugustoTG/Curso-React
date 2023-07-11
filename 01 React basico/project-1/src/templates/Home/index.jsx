@@ -5,6 +5,7 @@ import './styles.css';
 import { Posts } from '../../components/Posts';
 import { loadPosts } from '../../utils/load-posts'
 import { Button } from '../../components/Button';
+import { TextInput } from '../../components/textInput';
 
 export class Home extends Component {
   state = {
@@ -56,15 +57,13 @@ export class Home extends Component {
     }) : posts;
     return (
       <section className="container">
+        <div className='serch-conteiner'>
         {!!serchValue && (
-        <><h1>Serch Value: {serchValue}</h1></>)}
-        <input
-          type='search'
-          onChange={this.handleChange}
-          value={serchValue}
-          />
-        <Posts posts={filteredPosts} />
-
+        <h1>Serch Value: {serchValue}</h1>)}
+        <TextInput serchValue={serchValue} handleChange={this.handleChange}/>
+        </div>
+        {filteredPosts.length > 0 && (<Posts posts={filteredPosts} />)};
+        {filteredPosts.length === 0 && (<p>Não foi encontrado Posts = {serchValue}</p>)}
         <div className="button-container">
           {!serchValue && (<Button
             text="Load more posts"
