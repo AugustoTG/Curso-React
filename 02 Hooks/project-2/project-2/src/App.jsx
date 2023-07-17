@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -11,6 +11,24 @@ function App() {
   const handleClick =()=>{
     setReverse(!reverse);
   };
+
+  // componentDidUpdate - executa toda vez que o component é atualizado
+
+  useEffect(()=>{
+    console.log('componentDidUpdate')
+  });
+ // componentDidMount - executa 1x
+
+ useEffect(()=>{
+  console.log('componentDidMount')
+},[]);
+
+// com dependência - executa toda vez que a dependência mudar
+
+useEffect(()=>{
+  console.log('dependencia count mudou' )
+},[count]);
+
 
   return (
     <>
